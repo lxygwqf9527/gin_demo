@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/natefinch/lumberjack"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -20,7 +21,7 @@ func Init() (err error) {
 	writeSyncer := getLogWriter(viper.GetString("log.filename"),
 		viper.GetInt("log.max_size"),
 		viper.GetInt("log.max_backups"),
-		viper.GetInt("log.max_age")
+		viper.GetInt("log.max_age"),
 	)
 	encoder := getEncoder()
 	var l = new(zapcore.Level)
@@ -30,7 +31,7 @@ func Init() (err error) {
 	}
 	core := zapcore.NewCore(encoder, writeSyncer, l)
 
-	lg = zap.New(core, zap.AddCaller())
+	lg := zap.New(core, zap.AddCaller())
 	zap.ReplaceGlobals(lg) // 替换zap包中全局的logger实例，后续在其他包中只需使用zap.L()调用即可
 	return
 }

@@ -3,6 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
+	"gin_demo/dao/mysql"
+	"gin_demo/dao/redis"
+	"gin_demo/logger"
 	"gin_demo/routes"
 	"gin_demo/settings"
 	"net/http"
@@ -42,13 +45,13 @@ func main() {
 	// 6.启动服务
 	srv := &http.Server{
 		Addr:    fmt.Sprintf(":%d", viper.GetInt("app.port")),
-		Handler: router,
+		Handler: r,
 	}
 
 	go func() {
 		// 开启一个goroutine启动服务
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			zap.L().Fatalf("listen: %s\n", err)
+			zap.L().Fatal("listen: %s\n", zap.Error(err))
 		}
 	}()
 
@@ -60,7 +63,7 @@ func main() {
 	// signal.Notify把收到的 syscall.SIGINT或syscall.SIGTERM 信号转发给quit
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM) // 此处不会阻塞
 	<-quit                                               // 阻塞在此，当接收到上述两种信号时才会往下执行
-	zap.L().Println("Shutdown Server ...")
+	zap.L().Info("Shutdown Server ...")
 	// 创建一个5秒超时的context
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()

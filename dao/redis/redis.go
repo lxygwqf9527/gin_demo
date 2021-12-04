@@ -9,20 +9,20 @@ import (
 
 var rdb *redis.Client
 
-func Init() {
+func Init() (err error) {
 	rdb = redis.NewClient(&redis.Options{
-		Addr: fmt.Printf("%s:%f",
+		Addr: fmt.Sprintf("%s:%f",
 			viper.GetString("redis.host"),
 			viper.GetInt("redis.port"),
 		),
 		Password: viper.GetString("redis.password"),
 		DB:       viper.GetInt("redis.password"),
-		PoolSize: viper.GetInt("redis.pool_size")
+		PoolSize: viper.GetInt("redis.pool_size"),
 	})
 	_, err = rdb.Ping().Result()
-	return err
+	return
 }
 
-func Close(){
+func Close() {
 	_ = rdb.Close()
 }

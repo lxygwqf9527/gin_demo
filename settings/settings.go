@@ -9,13 +9,12 @@ import (
 
 func Init() (err error) {
 	viper.SetConfigName("config")
-	viper.SetconfigType("yaml")
+	viper.SetConfigType("yaml")
 	viper.AddConfigPath(".")
-	err := viper.ReadInConfig()
+	err = viper.ReadInConfig()
 	if err != nil {
 		fmt.Printf("viper.ReadInConfig() failed", err)
 		return
-		panic(fmt.Errorf("fatal error config file: %s \n", err))
 	}
 	viper.WatchConfig()
 	viper.OnConfigChange(func(in fsnotify.Event) {
