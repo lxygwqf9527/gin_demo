@@ -1,0 +1,22 @@
+app:
+  name: "web_app"
+  environment: "dev"
+  port: 8081
+log:
+  level: "debug"
+  filename: "web_app.log"
+  max_size: 200
+  max_age: 30
+  max_backups: 7
+mysql:
+  host: "192.168.197.128"
+  port: 3307
+  user: "root"
+  password: "123456"
+  dbname: "webapp"
+  max_open_conns: 200
+  max_idle_conns: 50
+redis:
+  host: "192.168.197.128"
+  port: 3307
+  db: 0
