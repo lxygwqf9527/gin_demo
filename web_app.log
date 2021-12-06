@@ -6,3 +6,7 @@
 {"level":"ERROR","time":"2021-12-04T17:39:58.916+0800","caller":"mysql/mysql.go:25","msg":"connect DB failed","error":"dial tcp: lookup %!d(string=192.168.197.128): no such host"}
 {"level":"INFO","time":"2021-12-04T17:40:05.378+0800","caller":"gin_demo/main.go:66","msg":"Shutdown Server ..."}
 {"level":"INFO","time":"2021-12-04T17:40:05.392+0800","caller":"gin_demo/main.go:75","msg":"Server exiting"}
+{"level":"DEBUG","time":"2021-12-06T15:44:56.811+0800","caller":"gin_demo/main.go:32","msg":"logger init success..."}
+{"level":"ERROR","time":"2021-12-06T15:45:03.657+0800","caller":"mysql/mysql.go:24","msg":"connect DB failed","error":"dial tcp: lookup 3307: no such host"}
+{"level":"INFO","time":"2021-12-06T15:47:52.968+0800","caller":"gin_demo/main.go:66","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2021-12-06T15:47:52.968+0800","caller":"gin_demo/main.go:75","msg":"Server exiting"}
